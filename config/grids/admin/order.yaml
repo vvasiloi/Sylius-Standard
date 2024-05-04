@@ -1,0 +1,17 @@
+sylius_grid:
+    grids:
+        sylius_admin_order:
+            actions:
+                item:
+                    restore:
+                        type: apply_transition
+                        label: Restore
+                        icon: undo
+                        options:
+                            link:
+                                route: app_admin_order_restore
+                                parameters:
+                                    id: resource.id
+                            class: green
+                            transition: restore
+                            graph: sylius_order

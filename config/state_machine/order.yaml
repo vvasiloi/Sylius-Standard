@@ -1,0 +1,32 @@
+winzou_state_machine:
+    sylius_order:
+        transitions:
+            restore:
+                from: [ "cancelled" ]
+                to: "new"
+        callbacks:
+            after:
+                restore_payment:
+                    on: [ "restore" ]
+                    do: [ "@sm.callback.cascade_transition", "apply" ]
+                    args: [ "object.getLastPayment()", "event", "'restore'", "'sylius_payment'" ]
+                restore_shipment:
+                    on: [ "restore" ]
+                    do: [ "@sm.callback.cascade_transition", "apply" ]
+                    args: [ "object.getShipments()", "event", "'restore'", "'sylius_shipment'" ]
+                restore_order_payment:
+                    on: [ "restore" ]
+                    do: [ "@sm.callback.cascade_transition", "apply" ]
+                    args: [ "object", "event", "'restore'", "'sylius_order_payment'" ]
+                restore_order_shipment:
+                    on: [ "restore" ]
+                    do: [ "@sm.callback.cascade_transition", "apply" ]
+                    args: [ "object", "event", "'restore'", "'sylius_order_shipping'" ]
+                restore_inventory:
+                    on: [ "restore" ]
+                    do: [ "@sylius.inventory.order_inventory_operator", "hold" ]
+                    args: [ "object" ]
+                restore_promotions_usages:
+                    on: [ "restore" ]
+                    do: [ "@sylius.promotion_usage_modifier", "increment" ]
+                    args: [ "object" ]

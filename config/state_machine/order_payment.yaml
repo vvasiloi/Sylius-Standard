@@ -1,0 +1,6 @@
+winzou_state_machine:
+    sylius_order_payment:
+        transitions:
+            restore:
+                from: [ "cancelled" ]
+                to: "new"

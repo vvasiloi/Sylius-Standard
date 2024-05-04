@@ -1,0 +1,6 @@
+winzou_state_machine:
+    sylius_shipment:
+        transitions:
+            restore:
+                from: [ "cancelled" ]
+                to: "ready"

@@ -8,6 +8,8 @@ imports:
 
     - { resource: "@SyliusPayPalPlugin/Resources/config/config.yaml" }
     - { resource: "../parameters.yaml" }
+    - { resource: "../state_machine/" }
+    - { resource: "../grids/" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'

@@ -1,0 +1,15 @@
+app_admin_order_restore:
+    path: /orders/{id}/restore
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order::applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: findOrderById
+                arguments:
+                    - '$id'
+            permission: true
+            state_machine:
+                graph: sylius_order
+                transition: restore
+            redirect: referer
